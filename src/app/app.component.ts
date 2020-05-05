@@ -14,6 +14,7 @@ export class AppComponent {
   title = 'Список сотрудников';
   workers: MyWorker[] = MyWorkersDatabase;
   myWorkerType = MyWorkerType;
+  editWorker: MyWorker;
 
   getByType(type: number) {
     return this.workers.filter((worker) => worker.type === type);
@@ -24,8 +25,12 @@ export class AppComponent {
     if (index !== -1) {
       this.workers.splice(index, 1);
     }
-  }
+  } 
 
+  onEditWorker(editedworker: MyWorker) {
+    let index = this.workers.findIndex((worker) => worker.id === editedworker.id);
+    this.workers[index] = editedworker;
+  }
   onAddWorker(worker) {
     let id =
       this.workers.length > 0

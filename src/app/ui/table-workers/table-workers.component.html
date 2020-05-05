@@ -8,14 +8,65 @@
             <th scope="col" [style.width]="'100px'">#</th>
             <th scope="col" [style.width]="'40%'">Имя</th>
             <th scope="col">Фамилия</th>
-            <th scope="col" [style.width]="'150px'"></th>
+            <th scope="col" [style.width]="'75px'"></th>
+            <th scope="col" [style.width]="'75px'"></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let worker of workers">
             <th scope="row">{{ worker.id }}</th>
-            <td>{{ worker.name }}</td>
-            <td>{{ worker.surname }}</td>
+
+            <ng-container *ngIf="show == worker.id; else listtempl">              
+              <td [style.width]="'30%'">
+                <input
+                type="text"
+                class="form-control"
+                placeholder="Имя" 
+                [(ngModel)]="name"
+
+                #nameinput
+                />
+              </td>
+              <td [style.width]="'30%'">
+                <input
+                type="text"
+                class="form-control"
+                placeholder="Фамилия"                                             
+                [(ngModel)]="surname"
+                #surnameinput
+                />
+              </td>
+              <td [style.width]="'40%'">
+                <select class="custom-select" [(ngModel)]="type">
+                  <option [ngValue]="myWorkerType.programmer">Программист</option>
+                  <option [ngValue]="myWorkerType.designer">Дизайнер</option>
+                  <option [ngValue]="myWorkerType.copywriter">Рекламщик</option>
+                  <option [ngValue]="myWorkerType.manager">Менеджер</option>
+                </select>
+              </td>
+              <td>
+                <button
+                class="btn btn-outline-primary btn-sm"
+                (click)="acceptEdit(worker.id)"
+                >
+                  Принять
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-template #listtempl>              
+              <td>{{ worker.name }}</td>
+              <td>{{ worker.surname }}</td>
+              <td>
+                <button
+                class="btn btn-outline-primary btn-sm"
+                (click)="editWorker(worker.id)"
+                >
+                  Изменить
+                </button>
+              </td>
+            </ng-template>
+                        
             <td>
               <button
                 class="btn btn-outline-danger btn-sm"

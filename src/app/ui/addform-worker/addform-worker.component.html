@@ -8,6 +8,7 @@
       class="form-control"
       placeholder="Имя"
       [(ngModel)]="name"
+      #nameinput
     />
   </div>
   <div class="col-4">
@@ -16,6 +17,7 @@
       class="form-control"
       placeholder="Фамилия"
       [(ngModel)]="surname"
+      #surnameinput
     />
   </div>
   <div class="col-4">
@@ -27,6 +29,6 @@
     </select>
   </div>
   <div class="col-12 mt-1">
-    <button class="btn btn-outline-primary btn-sm" (click)="onAddWorker()">Добавить</button>
-  </div>
+    <button class="btn btn-outline-primary btn-sm" (click)="onAddWorker()" [style.margin-right]="'5px'">Добавить</button>    
+  </div>  
 </div>
