@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { MyWorkerType, MyWorker } from 'src/app/shared/worker.model';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-table-workers',
@@ -13,16 +14,22 @@ export class TableWorkersComponent implements OnInit {
   @Output() deleteWorker = new EventEmitter<number>(); 
   @Output() editedWorker = new EventEmitter<MyWorker>();
 
-  show: number;
-  name: string;
-  surname: string;
+  show: number;  
   type: number;
-  myWorkerType = MyWorkerType;
+  myWorkerType = MyWorkerType;  
+  phonemask = ['+', /[1-9]/, '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-  @ViewChild('nameinput') nameinp: ElementRef;
-  @ViewChild('surnameinput') surnameinp: ElementRef;  
+  myForm: FormGroup;
 
-  constructor() {}
+  constructor() {
+
+    this.myForm = new FormGroup({
+      "uName": new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9а-яА-Я]+$")]),
+      "uSurname": new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9а-яА-Я]+$")]),
+      "uPhone": new FormControl("", [Validators.required]),
+      "uSpeciality": new FormControl(this.type),
+    })
+  }
 
   ngOnInit(): void {}
 
@@ -34,20 +41,13 @@ export class TableWorkersComponent implements OnInit {
     this.show = id;
   }
   acceptEdit(id: number) {
-    this.show = NaN;
-    if(!this.nameinp.nativeElement.value.match(/^[a-zA-Z0-9а-яА-Я]+$/)) {
-      this.nameinp.nativeElement.placeholder = 'Укажите имя';
-      return
-    }
-    if(!this.surnameinp.nativeElement.value.match(/^[a-zA-Z0-9а-яА-Я]+$/)) {
-      this.surnameinp.nativeElement.placeholder = 'Укажите фамилию';
-      return
-    }
+    this.show = NaN;   
     this.editedWorker.emit({     
       id: id,
-      name: this.name,
-      surname: this.surname,
-      type: this.type,
+      name: this.myForm.controls['uName'].value,
+      surname: this.myForm.controls['uSurname'].value,
+      phone: this.myForm.controls['uPhone'].value,
+      type: this.myForm.controls['uSpeciality'].value,
     });    
   }
 }

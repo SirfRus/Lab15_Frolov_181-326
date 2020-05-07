@@ -1,0 +1,19 @@
+
+form {
+    width: 100%;
+}
+.col-4  {
+    display: inline-block;    
+    padding: 5px;
+    width: 20%;
+}
+button {
+    border: 1.5px solid blue;
+    color: black;    
+}
+button:disabled {
+    background-color: rgb(243, 109, 109);
+    color: black;
+    border: 1.5px solid rgb(241, 47, 47);
+    
+}

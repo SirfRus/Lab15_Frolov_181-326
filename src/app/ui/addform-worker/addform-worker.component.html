@@ -2,33 +2,28 @@
   <div class="col-12">
     <h5>Добавить сотрудника</h5>
   </div>
-  <div class="col-4">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Имя"
-      [(ngModel)]="name"
-      #nameinput
-    />
-  </div>
-  <div class="col-4">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Фамилия"
-      [(ngModel)]="surname"
-      #surnameinput
-    />
-  </div>
-  <div class="col-4">
-    <select class="custom-select" [(ngModel)]="type">
-      <option [ngValue]="myWorkerType.programmer">Программист</option>
-      <option [ngValue]="myWorkerType.designer">Дизайнер</option>
-      <option [ngValue]="myWorkerType.copywriter">Рекламщик</option>
-      <option [ngValue]="myWorkerType.manager">Менеджер</option>
-    </select>
-  </div>
-  <div class="col-12 mt-1">
-    <button class="btn btn-outline-primary btn-sm" (click)="onAddWorker()" [style.margin-right]="'5px'">Добавить</button>    
-  </div>  
+
+  <form [formGroup]="myForm">
+    <div class="col-4">
+      <input class="form-control" placeholder="Имя" formControlName="uName"/>
+    </div>    
+    <div class="col-4">
+      <input class="form-control" placeholder="Фамилия" formControlName="uSurname"/>
+    </div>
+    <div class="col-4">
+      <input class="form-control" placeholder="Телефон" formControlName="uPhone" [textMask]="{mask: phonemask}"/>    
+    </div>
+    <div class="col-4">
+      <select class="custom-select" formControlName="uSpeciality">
+        <option [ngValue]="myWorkerType.programmer">Программист</option>
+        <option [ngValue]="myWorkerType.designer">Дизайнер</option>
+        <option [ngValue]="myWorkerType.copywriter">Рекламщик</option>
+        <option [ngValue]="myWorkerType.manager">Менеджер</option>           
+      </select>      
+    </div>
+    <div class="col-4">
+      <button [disabled]="myForm.controls['uName'].invalid || myForm.controls['uSurname'].invalid || myForm.controls['uPhone'].invalid" class="btn btn-outline-primary btn-sm" (click)="onAddWorker()" #addBut>Добавить</button>
+    </div>  
+  </form>
+  
 </div>
