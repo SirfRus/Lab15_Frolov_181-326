@@ -12,6 +12,8 @@ export class AppComponent {
 
   constructor(private dbs: DbserviceService) {}
   
+  nameinp: string = '';
+  surninp: string = '';
   myWorkerType = MyWorkerType;       
  
   getByType(type: number) {                        

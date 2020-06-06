@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let worker of workers">
+          <tr *ngFor="let worker of workers | nSfilter: nameinp: surninp">
             <th scope="row">{{ worker.id }}</th>
 
             <ng-container *ngIf="show == worker.id; else listtempl">    

@@ -13,12 +13,14 @@ export class TableWorkersComponent {
   @Input() title: string;
   @Input() spec: number;
   @Input() workers: Workers[];
+  @Input() nameinp: string;
+  @Input() surninp: string;
   
   @Output() editedWorker = new EventEmitter<Workers>();
 
   show: number;  
   type: number;
-  myWorkerType = MyWorkerType;  
+  myWorkerType = MyWorkerType;    
   phonemask = ['+', /[1-9]/, '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   myForm: FormGroup;

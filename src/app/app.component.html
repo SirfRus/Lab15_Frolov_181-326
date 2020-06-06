@@ -3,21 +3,38 @@
     <div class="col-12">
       <h1>Список сотрудников</h1>
     </div>
-  </div>
+  </div>  
   <app-addform-worker></app-addform-worker>
+
+  <div>
+    <h5>Фильтрация по имени и фамилии</h5>    
+    <input class="form-control" type="text" placeholder="Фильтрация по имени" [style.width.px]='450' [(ngModel)]="nameinp">
+    <br>    
+    <input class="form-control" type="text" placeholder="Фильтрация по фамилии" [style.width.px]='450' [(ngModel)]="surninp">
+    <br>
+  </div>
+
   <app-table-workers
     [title]="'Программисты'"
-    [spec]="getByType(myWorkerType.programmer)"        
+    [spec]="getByType(myWorkerType.programmer)"   
+    [nameinp]="nameinp"
+    [surninp]="surninp"     
   ></app-table-workers>
   <app-table-workers
     [title]="'Дизайнеры'"
     [spec]="getByType(myWorkerType.designer)"        
+    [nameinp]="nameinp"
+    [surninp]="surninp"     
   ></app-table-workers>
   <app-table-workers
     [title]="'Рекламщики'"
     [spec]="getByType(myWorkerType.copywriter)"        
+    [nameinp]="nameinp"
+    [surninp]="surninp"     
   ></app-table-workers>
   <app-table-workers
     [title]="'Менеджеры'"
     [spec]="getByType(myWorkerType.manager)"        
+    [nameinp]="nameinp"
+    [surninp]="surninp"     
   ></app-table-workers>
